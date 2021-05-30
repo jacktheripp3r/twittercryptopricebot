@@ -47,9 +47,6 @@ jdcal==1.4.1
 json5==0.9.5
 llvmlite==0.34.0
 locket==0.2.1
-mkl-fft==1.2.0
-mkl-random==1.1.1
-mkl-service==2.3.0
 mpmath==1.1.0
 multipledispatch==0.6.0
 mypy-extensions==0.4.3
