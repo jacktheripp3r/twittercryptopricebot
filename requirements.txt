@@ -49,11 +49,6 @@ llvmlite==0.34.0
 locket==0.2.1
 mpmath==1.1.0
 multipledispatch==0.6.0
-mypy-extensions==0.4.3
-navigator-updater==0.2.1
-nsepy==0.8
-nsepython==0.0.94
-nsetools==1.0.11
 ntlm-auth==1.5.0
 oauthlib==3.1.0
 olefile==0.46
