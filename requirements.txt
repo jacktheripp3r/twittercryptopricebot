@@ -68,7 +68,6 @@ pycodestyle==2.6.0
 pycosat==0.6.3
 pycurl==7.43.0.6
 pyflakes==2.2.0
-pyodbc===4.0.0-unsupported
 pytest==0.0.0
 python-binance==0.7.11
 python-dateutil==2.8.1
