@@ -60,8 +60,7 @@ while y < 10:
 # In[31]:
 
 
-locale.setlocale(locale.LC_ALL, 'en_US')
-export LC_ALL=C
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 iteri = 0
 percent = 0
 lp = True
