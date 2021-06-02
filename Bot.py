@@ -61,6 +61,7 @@ while y < 10:
 
 
 locale.setlocale(locale.LC_ALL, 'en_US')
+export LC_ALL=C
 iteri = 0
 percent = 0
 lp = True
@@ -129,7 +130,7 @@ while True:
         for tweet in tweetlist:
             final = final + '\n' + tweet
         print(final)
-        #api.update_status(final)
+        api.update_status(final)
         time.sleep(3600)
 
 
