@@ -59,9 +59,13 @@ while y < 10:
 # In[31]:
 
 
+locale.setlocale(locale.LC_ALL, 'en_US')
 iteri = 0
+percent = 0
+lp = True
 while True:
     tweetlist = []
+    latestprice = client.get_all_tickers()
     for tick in listone:
 
         firsthalf = tick
@@ -82,9 +86,9 @@ while True:
                 if a[x]['symbol'] == concat:
                     #print('If this is true')
                     #print(x)
-                    p = float(a[x]['price'])
-                    p = round(p, 2)
-                    tweet = concat + ': ' + str(p)
+                    p = round(float(a[x]['price']), 2)
+                    #p = round(p, 2)
+                    tweet = firsthalf + ': $' + str(p)
                     tweetlist.append(tweet)
                     break
                 x += 1
@@ -92,26 +96,40 @@ while True:
             #api.update_status(final)
             iteri += 1
         else:
-            latestprice = client.get_all_tickers()
+            #latestprice = client.get_all_tickers()
             x = 0
             for i in latestprice:
                 if latestprice[x]['symbol'] == concat:
                     p = float(latestprice[x]['price'])
                     p = round(p, 2)
-                    price = concat + ': ' + str(p)
-                    change = float(latestprice[x]['price']) - float(a[x]['price'])
-                    change = round(change,4)
-                    tweet = price + ',' + ' Change: $' + str(change)
-                    tweetlist.append(tweet)
+                    price = firsthalf + ': ' + locale.currency(p, grouping=True)
+                    change = float(p) - float(a[x]['price'])
+                    change = round(change, 4)
+                    percent = round(change/float(a[x]['price']) * 100, 2)
+                    if change > 0:
+                        tweet = price + ',' + '(' + locale.currency(change, grouping=True) + ', +' + str(percent) + '%)'
+                        tweetlist.append(tweet)
+                    else:
+                        tweet = price + ',' + '(' + locale.currency(change, grouping=True) + ', ' + str(percent) + '%)'
+                        tweetlist.append(tweet)
                     break
                 x += 1
+                lp = False
     
     final = ''
-    for tweet in tweetlist:
-        final = final + '\n' + tweet
-    #print(final)
-    api.update_status(final)
-    time.sleep(3600)
+    if lp == True:
+        for tweet in tweetlist:
+            final = final + '\n' + tweet
+        #print(final)
+        time.sleep(360)
+        continue
+    else:
+        a = latestprice
+        for tweet in tweetlist:
+            final = final + '\n' + tweet
+        print(final)
+        #api.update_status(final)
+        time.sleep(3600)
 
 
 # In[ ]:
