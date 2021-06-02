@@ -12,6 +12,7 @@ import time
 from binance.client import Client
 from datetime import timedelta, datetime
 from dateutil import parser
+import locale
 import os 
 from os import environ 
 
