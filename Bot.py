@@ -94,9 +94,9 @@ while True:
         else:
             latestprice = client.get_all_tickers()
             x = 0
-            for i in a:
+            for i in latestprice:
                 if latestprice[x]['symbol'] == concat:
-                    p = float(a[x]['price'])
+                    p = float(latestprice[x]['price'])
                     p = round(p, 2)
                     price = concat + ': ' + str(p)
                     change = float(latestprice[x]['price']) - float(a[x]['price'])
