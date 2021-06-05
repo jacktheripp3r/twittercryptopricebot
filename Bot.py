@@ -34,6 +34,12 @@ api=tweepy.API(auth)
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
+session = requests.Session()
+session.headers.update(headers)
+
+locale.setlocale(locale.LC_ALL, 'en_US')
+response = session.get(url)
+
 headers = {
   'Accepts': 'application/json',
   'X-CMC_PRO_API_KEY': cmcapi,
