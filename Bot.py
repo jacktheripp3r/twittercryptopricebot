@@ -57,7 +57,7 @@ while True:
             tweet = tweet + response.json()['data'][i]['symbol'] + ': $1' +'\n'
             continue
         if change > 0:
-            add = str(i+1) + '.' + response.json()['data'][i]['symbol'] + ': {}(+{}, {}%)'.format(locale.currency(cryptoprice, grouping=True), locale.currency(valuechange, grouping = True), round(change, 2)) + '\n'
+            add = response.json()['data'][i]['symbol'] + ': {}(+{}, {}%)'.format(locale.currency(cryptoprice, grouping=True), locale.currency(valuechange, grouping = True), round(change, 2)) + '\n'
             if len(tweet+add) > 280:
                 tweet2 = tweet2 + add
             else:
