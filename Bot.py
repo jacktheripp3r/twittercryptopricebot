@@ -37,7 +37,7 @@ url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 session = requests.Session()
 session.headers.update(headers)
 
-locale.setlocale(locale.LC_ALL, 'en_US')
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 response = session.get(url)
 
 headers = {
