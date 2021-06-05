@@ -52,7 +52,8 @@ while True:
         cryptoprice = round((response.json()['data'][i]['quote']['USD']['price']), 2)
         price = response.json()['data'][i]['quote']['USD']['price']
         change = response.json()['data'][i]['quote']['USD']['percent_change_1h']
-        valuechange = round(price - (price/(change/100+1) / 100), 2)
+        valuechange = price/(change/100+1)
+        valuechange = round(price - valuechange, 2)
         if 'USD' in response.json()['data'][i]['symbol']:
             tweet = tweet + response.json()['data'][i]['symbol'] + ': $1' +'\n'
             continue
