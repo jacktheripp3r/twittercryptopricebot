@@ -52,9 +52,9 @@ while True:
         cryptoprice = round((response.json()['data'][i]['quote']['USD']['price']), 2)
         price = response.json()['data'][i]['quote']['USD']['price']
         change = response.json()['data'][i]['quote']['USD']['percent_change_1h']
-        valuechange = round(price * change / 100, 2)
+        valuechange = round(price - (price/(change/100+1) / 100), 2)
         if 'USD' in response.json()['data'][i]['symbol']:
-            tweet = tweet + str(i+1) + '.' + response.json()['data'][i]['symbol'] + ': $1' +'\n'
+            tweet = tweet + response.json()['data'][i]['symbol'] + ': $1' +'\n'
             continue
         if change > 0:
             add = str(i+1) + '.' + response.json()['data'][i]['symbol'] + ': {}(+{}, {}%)'.format(locale.currency(cryptoprice, grouping=True), locale.currency(valuechange, grouping = True), round(change, 2)) + '\n'
@@ -63,7 +63,7 @@ while True:
             else:
                 tweet = tweet + add
         else:
-            add = str(i+1) + '.' + response.json()['data'][i]['symbol'] + ': {}({}, {}%)'.format(locale.currency(cryptoprice, grouping=True), locale.currency(valuechange, grouping = True), round(change, 2)) + '\n'
+            add = response.json()['data'][i]['symbol'] + ': {}({}, {}%)'.format(locale.currency(cryptoprice, grouping=True), locale.currency(valuechange, grouping = True), round(change, 2)) + '\n'
 
             if len(tweet+add) > 280:
                 tweet2 = tweet2 + add
@@ -86,7 +86,7 @@ while True:
             num /= 1000.0
         return '${} {}'.format('{:f}'.format(num).rstrip('0').rstrip('.'), ['', 'K', 'Mn', 'Bn', 'Tn'][magnitude])
     for i in range(10):
-        tweet = tweet + str(i+1) + '.' + response.json()['data'][i]['name'] + ': ' + human_format(response.json()['data'][i]['quote']['USD']['market_cap']) + '\n'
+        tweet = tweet + response.json()['data'][i]['name'] + ': ' + human_format(response.json()['data'][i]['quote']['USD']['market_cap']) + '\n'
     print(tweet)
     api.update_status(tweet)
     time.sleep(1800)
