@@ -90,7 +90,7 @@ while True:
         tweet = tweet + response.json()['data'][i]['name'] + ': ' + human_format(response.json()['data'][i]['quote']['USD']['market_cap']) + '\n'
     print(tweet)
     api.update_status(tweet)
-    time.sleep(1800)
+    time.sleep(3600)
 
 
 
